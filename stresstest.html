@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mind Matters在线心理压力测试</title>
+  <link rel="icon" type="image/png" href="mind_matters_logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .neon {
+      color: #fff;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 40px #0ff,
+        0 0 80px #0ff,
+        0 0 90px #0ff,
+        0 0 100px #0ff,
+        0 0 150px #0ff;
+    }
+    /* general styling */
+    :root {
+      font-size: calc(1vw + 1vh + 1.5vmin);
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    .container {
+      margin: 0 auto;
+    }
+    .container2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    body {
+      font-family: Verdana;
+      text-align: center;
+      background-image: url('imagebg3.gif');
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      opacity: 0; /* set initial opacity to 0 */
+      animation: fadeIn 1s ease-in-out forwards; /* specify the animation */
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0; /* animate from 0 opacity */
+      }
+      to {
+        opacity: 1; /* animate to 1 opacity */
+      }
+    }
+    h1 {
+      font-size:70px;
+      font-weight: 350;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    h {
+      display: block;
+      font-size: 18px;
+      color: #ffffff;
+      margin-top: 60px;
+      margin-bottom: 20px; /* add some space below the heading */
+    }
+
+    p {
+      margin-left: 20px;
+      margin-right: 20px;
+      text-align:center;
+      font-style: Verdana;
+      font-size: 19px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: black;
+    }
+
+    form {
+      display: inline-block;
+      width: 1200px;
+      font-size: 17px;
+      text-align: center;
+      text-shadow: 2px 2px 3px #ffffff;
+      padding: 20px;
+      color:black;
+      background-color: rgba(255, 255, 255, 0.5); /* semi-transparent white background */
+      border: 4px solid #3b3b3b;
+      border-radius: 10px;
+      backdrop-filter: blur(10px); /* apply a blur filter to create the glassmorphism effect */
+      /* fallback background color for older browsers */
+    }
+
+    .introduction {
+      display: inline-block;
+      width: 1200px;
+      font-size: 16px;
+      text-align: center;
+      padding: 20px;
+      color:black;
+      background-color: rgba(255, 255, 255, 0.5); /* semi-transparent white background */
+      border: 4px solid #3b3b3b;
+      border-radius: 10px;
+      backdrop-filter: blur(10px); /* apply a blur filter to create the glassmorphism effect */
+      /* fallback background color for older browsers */
+    }
+
+    .radio {
+      display: grid;
+      grid-template-columns: 30px 250px;
+      justify-content: center;
+      text-align: left;
+      gap: 30px;
+      padding: 10px;
+    }
+
+    .radio label {
+      display: flex;
+      align-items: center;
+    }
+
+    .radio input[type="radio"] {
+      margin-right: 5px;
+      transform: scale(1.5); /* Increase the scale value as needed */
+    }
+
+    .radio label span {
+      font-size: 1.5em; /* Increase the font size as needed */
+      transform: skewX(-15deg) scale(1.2);
+    }
+
+    .radio input[type="radio"]:hover {
+      transform: scale(1.8) rotate(360deg);
+      transition: transform 0.5s ease;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+    .prev-btn {
+      font-size: 15px;
+      padding: 10px 20px; /* add some padding to the button */
+      width:120px;
+      margin-top: 20px;
+      background-color: #4CAF50; /* set the background color */
+      color: #ffffff; /* set the text color */
+      border: none; /* remove the border */
+      border-radius: 4px; /* add some border radius */
+      cursor: pointer; /* add a pointer cursor on hover */
+    }
+
+    .prev-btn:hover {
+      background-color: #3e8e41; /* change the background color on hover */
+    }
+
+    .next-btn {
+      font-size: 15px;
+      padding: 10px 20px; /* add some padding to the button */
+      width:120px;
+      margin-top: 20px;
+      background-color: #4CAF50; /* set the background color */
+      color: #ffffff; /* set the text color */
+      border: none; /* remove the border */
+      border-radius: 4px; /* add some border radius */
+      cursor: pointer; /* add a pointer cursor on hover */
+    }
+
+    .next-btn:hover {
+      background-color: #3e8e41; /* change the background color on hover */
+    }
+
+    .submit-button{
+      text-align: center;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-size: 20px;
+      letter-spacing: 4px;
+      position: relative;
+      background-color: #16a085;
+      border: none;
+      color: #fff;
+      padding: 20px;
+      width: 200px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      transition-duration: 0.4s;
+      overflow: hidden;
+      box-shadow: 0 5px 15px #193047;
+      border-radius: 4px;
+      justify-content: center;
+    }
+
+    .submit-button:hover {
+      background: #fff;
+      box-shadow: 0px 2px 10px 5px #1abc9c;
+      color: #000;
+    }
+
+    .submit-button:after {
+      content: "";
+      background: #1abc9c;
+      display: block;
+      position: absolute;
+      padding-top: 300%;
+      padding-left: 350%;
+      margin-left: -20px !important;
+      margin-top: -120%;
+      opacity: 0;
+      transition: all 0.8s
+    }
+
+    .submit-button:active:after {
+      padding: 0;
+      margin: 0;
+      opacity: 1;
+      transition: 0s
+    }
+
+    .submit-button:focus { outline:0; }
+
+    .image{
+      width:250px;
+      height:150px;
+      border: 2px solid rgb(255, 255, 255);
+      border-radius: 10px;
+      box-shadow: 5px 5px 10px gray;
+    }
+
+    #result {
+      text-align: center;
+      margin-top: 30px;
+      font-weight: bold;
+      font-size: 32px;
+      padding: 20px;
+    }
+  </style>
+  <script type="text/javascript">
+
+function startTest() {
+  document.querySelector('.introduction').style.display = 'none';
+  document.querySelector('#questions-form').style.display = 'inline-block';
+}
+    
+    var currentQuestion = 1;
+
+    function nextQuestion() {
+      // Hide the current question
+      var current = document.getElementById("q" + currentQuestion);
+      current.style.display = "none";
+      
+      // Show the next question
+      currentQuestion++;
+      var next = document.getElementById("q" + currentQuestion);
+      next.style.display = "block";
+      
+      // Show the previous button if it's not the first question
+      if (currentQuestion > 0) {
+        var prevButton = document.getElementById("q" + (currentQuestion - 1)).querySelector("button");
+        prevButton.style.display = "block";
+      }
+      
+      // If this is the last question, show the score button
+      if (currentQuestion == 14) {
+        var button = document.getElementById("button");
+        button.style.display = "block";
+      }
+    }
+
+    function prevQuestion() {
+      // Hide the current question
+      var current = document.getElementById("q" + currentQuestion);
+      current.style.display = "none";
+      
+      // Show the previous question
+      currentQuestion--;
+      var prev = document.getElementById("q" + currentQuestion);
+      prev.style.display = "block";
+      
+      // Hide the previous button if it's the first question
+      if (currentQuestion == 1) {
+        var prevButton = document.getElementById("q" + currentQuestion).querySelector("button");
+        prevButton.style.display = "block";
+      }
+      
+      // Hide the score button if it's not the last question
+      if (currentQuestion < 14) {
+        var button = document.getElementById("button");
+        button.style.display = "none";
+      }
+    }
+    
+    function calculateScore() {
+      // Check if all questions are answered
+      var allQuestionsAnswered = true;
+      for (var i = 1; i <= 13; i++) {
+        var question = document.getElementById("q" + i);
+        var answer = document.querySelector('input[name="q' + i + '"]:checked');
+        if (!answer) {
+          allQuestionsAnswered = false;
+          question.style.backgroundColor = "pink";
+        } else {
+          question.style.backgroundColor = "white";
+        }
+      }
+
+      if (!allQuestionsAnswered) {
+        alert("You have missed answering one or more questions. Please refresh the page and answer all the questions!!!");
+        return;
+      }
+      // Get the user's answers
+      var q1 = parseInt(document.querySelector('input[name="q1"]:checked').value);
+      var q2 = parseInt(document.querySelector('input[name="q2"]:checked').value);
+      var q3 = parseInt(document.querySelector('input[name="q3"]:checked').value);
+      var q4 = parseInt(document.querySelector('input[name="q4"]:checked').value);
+      var q5 = parseInt(document.querySelector('input[name="q5"]:checked').value);
+      var q6 = parseInt(document.querySelector('input[name="q6"]:checked').value);
+      var q7 = parseInt(document.querySelector('input[name="q7"]:checked').value);
+      var q8 = parseInt(document.querySelector('input[name="q8"]:checked').value);
+      var q9 = parseInt(document.querySelector('input[name="q9"]:checked').value);
+      var q10 = parseInt(document.querySelector('input[name="q10"]:checked').value);
+      var q11 = parseInt(document.querySelector('input[name="q11"]:checked').value);
+      var q12 = parseInt(document.querySelector('input[name="q12"]:checked').value);
+      var q13 = parseInt(document.querySelector('input[name="q13"]:checked').value);
+
+
+      // Calculate the score
+      var score = q1 + q2+ q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10 + q11 + q12 + q13;
+      
+      // Display the result
+      var result = document.getElementById("result");
+      var percentage = ((score / 40) * 100).toFixed(2);
+
+      if (score <= 14) {
+        result.innerHTML = "您的压力水平很低。您很冷静和镇定。 <br>您真的可以应对压力。如果您开始看到生活中的变化， <br>您可以开始尝试通过您发现的可以消除压力的来源来保持这个水平。 <br><br> 此测验不是诊断工具。 <br>精神健康障碍只能由合格的精神卫生专业人员诊断。";
+        result.style.color= "#00ff00";
+        result.style.backgroundColor = "#b7ffbf";
+      } else if (score <= 25) {
+        result.innerHTML = "您的压力水平适中。您肯定会有一些压力。 <br>您可能也有足够的应对压力的技巧。通过发现压力来释放压力 <br>可以消除的压力来源以及包括体育锻炼、呼吸练习或音乐等有效策略，找到缓解压力的方法。 <br><br> 此测验不是诊断工具。 <br>精神健康障碍只能由合格的精神卫生专业人员诊断。";
+        result.style.color= "blue";
+        result.style.backgroundColor = "#e5f7fe";
+      } else {
+        result.innerHTML = "您的压力水平很高。您的生活中有太多的压力。 <br>立即采取措施减轻和管理您的压力。通过发现通过发现压力来释放压力 <br>可以消除的压力来源以及包括体育锻炼、呼吸练习或音乐等有效策略，找到缓解压力的方法。 <br>如果您认为自己可能患有压力，焦虑或任何其他医疗健康状况，Mind Matters强烈 <br>建议您寻求心理健康专家的帮助，以获得适当的诊断和支持。<br><br> 此测验不是诊断工具。 <br>精神健康障碍只能由合格的精神卫生专业人员诊断。";
+        result.style.color= "red";
+        result.style.backgroundColor = "#ffe5e5";
+      }
+      result.innerHTML = "<span style='font-size: 30px; text-shadow: 1px 1px 2px rgb(0,0,0);'>您的总压力评分为 " + score + "/40. (" + percentage + "%)</span><br><span style='font-size: 20px; color: black;'>" + result.innerHTML + "</span>";
+
+    // Hide the questions and previous buttons and show the first question
+    for (var i = 2; i <= 13; i++) {
+      var question = document.getElementById("q" + i);
+      question.style.display = "none";
+      var prevButton = question.querySelector("button");
+      prevButton.style.display = "none";
+      }
+      var button = document.getElementById("button");
+      button.style.display = "none";
+    }
+  </script>
+</head>
+<div class="container">
+  <h1 class="neon">Mind Matters<br>在线心理压力测试</h1>
+</div>
+  <h>请回答以下问题以确定您的压力水平：</h>
+    <div class="introduction">
+      <p>欢迎来到 Mind Matters 在线心理压力测试 <br><br>此在线心理压力测试并不意味着用作诊断工具。
+
+        <br><br>根据您对问题的回答，您将收到一个让您了解自己压力有多大的结果。但结果不会告诉您，您的健康是否会因您所承受的压力而受到威胁。
+        
+        如果您担心自己的压力水平、身体压力症状，请考虑向受过训练的医疗专业人员寻求帮助，例如医生或心理健康专家。
+
+        <br><br>Mind Matters 认为评估可能是获得治疗宝贵的的第一步。人们常常因为担心他们的担忧不合理或严重到需要专业干预而停止寻求帮助。
+      
+       <br><br> 请如实回答所有问题。 </p>
+      <button type="button" class="submit-button" onclick="startTest()">开始测试</button>
+    </div>
+    <div class="container">
+    <form id="questions-form" style="display:none">
+
+  <form>
+    <div id="q1" >
+      <img src="Q1.jpg" class="image" alt="overwhelmed">
+      <p>1. 您多久会感到不知所措或无法应付您的日常职责？</p>
+      <div class="radio">
+      <input type="radio"  name="q1" value="0"> 从来没有<br>
+      <input type="radio"  name="q1" value="1"> 很少<br>
+      <input type="radio"  name="q1" value="2"> 一周几次<br>
+      <input type="radio"  name="q1" value="3"> 几乎每天<br>
+    </div>
+      <div class="button-container">
+      <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+      </div>
+    </div>
+
+    <div id="q2" style="display: none;">
+      <img src="Q2.jpg" class="image" alt="headaches">
+      <p>2. 您多久会经历一次压力引起的身体症状，例如头痛或肌肉紧张？</p>
+      <div class="radio">
+      <input type="radio" name="q2" value="0"> 从来没有<br>
+      <input type="radio" name="q2" value="1"> 很少<br>
+      <input type="radio" name="q2" value="2"> 一周几次<br>
+      <input type="radio" name="q2" value="3"> 几乎每天<br>
+      </div>
+      <div class="button-container">
+      <button type="button" class="prev-btn" onclick="prevQuestion()">上一题</button>
+      <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+      </div>
+    </div>
+    
+    <div id="q3" style="display: none;">
+      <img src="Q3.jpg" class="image" alt="worried">
+      <p>3. 您多久感到焦虑或担心？</p>
+      <div class="radio">
+      <input type="radio" name="q3" value="0"> 从来没有<br>
+      <input type="radio" name="q3" value="1"> 很少<br>
+      <input type="radio" name="q3" value="2"> 一周几次<br>
+      <input type="radio" name="q3" value="3"> 几乎每天<br>
+      </div>
+      <div class="button-container">
+      <button type="button" class="prev-btn"onclick="prevQuestion()">上一题</button>
+      <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+      </div>
+    </div>
+
+    <div id="q4" style="display: none;">
+      <img src="Q4.jpg" class="image" alt="hopelessness">
+      <p>4. 您多久经历一次绝望的感觉？</p>
+      <div class="radio">
+      <input type="radio" name="q4" value="0"> 从来没有<br>
+      <input type="radio" name="q4" value="1"> 很少<br>
+      <input type="radio" name="q4" value="2"> 一周几次<br>
+      <input type="radio" name="q4" value="3"> 几乎每天<br>
+      </div>
+      <div class="button-container">
+      <button type="button" class="prev-btn"onclick="prevQuestion()">上一题</button>
+      <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+      </div>
+    </div>
+
+    <div id="q5" style="display: none;">
+      <img src="Q5.jpg" class="image" alt="disconnected">
+      <p>5. 您多久没有与家人和朋友联系？</p>
+      <div class="radio">
+      <input type="radio" name="q5" value="0"> 从来没有<br>
+      <input type="radio" name="q5" value="1"> 很少<br>
+      <input type="radio" name="q5" value="2"> 一周几次<br>
+      <input type="radio" name="q5" value="3"> 几乎每天<br>
+      </div>
+      <div class="button-container">
+      <button type="button" class="prev-btn"onclick="prevQuestion()">上一题</button>
+      <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+      </div>
+  </div>
+
+    <div id="q6" style="display: none;">
+      <img src="Q6.jpg" class="image" alt="smoking">
+      <p>6. 您多久把不健康的习惯例如饮酒或吸烟来应对压力？</p>
+      <div class="radio">
+      <input type="radio" name="q6" value="0"> 从来没有<br>
+      <input type="radio" name="q6" value="1"> 很少<br>
+      <input type="radio" name="q6" value="2"> 一周几次<br>
+      <input type="radio" name="q6" value="3"> 几乎每天<br>
+    </div>
+      <div class="button-container">
+      <button type="button" class="prev-btn"onclick="prevQuestion()">上一题</button>
+      <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+      </div>
+    </div>
+
+    <div id="q7" style="display: none;">
+      <img src="Q7.jpg" class="image" alt="focus">
+      <p>7. 在工作时间，您是否很难保持专注于手头的任务？</p>
+      <div class="radio">
+      <input type="radio" name="q7" value="0"> 从来没有<br>
+      <input type="radio" name="q7" value="1"> 很少<br>
+      <input type="radio" name="q7" value="2"> 一周几次<br>
+      <input type="radio" name="q7" value="3"> 几乎每次<br>
+      </div>
+      <div class="button-container">
+      <button type="button" class="prev-btn"onclick="prevQuestion()">上一题</button>
+      <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+      </div>
+  </div>
+
+    <div id="q8" style="display: none;">
+      <img src="Q8.jpg" class="image" alt="expectations">
+    <p>8. 您会不会觉得自己经常没有达到自己的期望或标准</p>
+    <div class="radio">
+    <input type="radio" name="q8" value="0"> 从来没有<br>
+    <input type="radio" name="q8" value="1"> 很少<br>
+    <input type="radio" name="q8" value="2"> 一周几次<br>
+    <input type="radio" name="q8" value="3"> 几乎每天<br>
+    </div>
+    <div class="button-container">
+    <button type="button" class="prev-btn"onclick="prevQuestion()">上一题</button>
+    <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+    </div>
+  </div>
+
+    <div id="q9" style="display: none;">
+      <img src="Q9.jpg" class="image" alt="decisions">
+      <p>9. 您多久会感到难以集中注意力或难以做出决定？</p>
+      <div class="radio">
+      <input type="radio" name="q9" value="0"> 从来没有<br>
+      <input type="radio" name="q9" value="1"> 很少<br>
+      <input type="radio" name="q9" value="2"> 一周几次<br>
+      <input type="radio" name="q9" value="3"> 几乎每次<br>
+      </div> 
+      <div class="button-container">
+      <button type="button" class="prev-btn"onclick="prevQuestion()">上一题</button>
+      <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+      </div>
+  </div>
+
+    <div id="q10" style="display: none;">
+      <img src="Q10.jpg" class="image" alt="conflict">
+      <p>10. 您多久与同事或家人发生冲突？</p>
+      <div class="radio">
+      <input type="radio" name="q10" value="0"> 从来没有<br>
+      <input type="radio" name="q10" value="1"> 很少<br>
+      <input type="radio" name="q10" value="2"> 一周几次<br>
+      <input type="radio" name="q10" value="3"> 几乎每天<br>
+      </div> 
+      <div class="button-container">
+      <button type="button" class="prev-btn"onclick="prevQuestion()">上一题</button>
+      <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+      </div>
+    </div>
+
+    <div id="q11" style="display: none;">
+      <img src="Q11.jpg" class="image" alt="health">
+      <p>11. 您多久感觉自己的压力影响到您的身体健康？</p>
+      <div class="radio">
+      <input type="radio" name="q11" value="0"> 从来没有<br>
+      <input type="radio" name="q11" value="1"> 很少<br>
+      <input type="radio" name="q11" value="2"> 一周几次<br>
+      <input type="radio" name="q11" value="3"> 几乎每天<br>
+      </div>
+      <div class="button-container">
+      <button type="button" class="prev-btn"onclick="prevQuestion()">上一题</button>
+      <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+      </div>
+  </div>
+
+    <div id="q12" style="display: none;">
+      <img src="Q12.jpg" class="image" alt="break">
+      <p>12. 您多久觉得需要从日常生活中休息以减轻压力？</p>
+      <div class="radio">
+      <input type="radio" name="q12" value="0"> 从来没有<br>
+      <input type="radio" name="q12" value="1"> 很少<br>
+      <input type="radio" name="q12" value="2"> 一周几次<br>
+      <input type="radio" name="q12" value="3"> 几乎每天<br> 
+      </div>
+      <div class="button-container">
+      <button type="button" class="prev-btn"onclick="prevQuestion()">上一题</button>
+      <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+      </div>
+    </div>
+
+    <div id="q13" style="display: none;">
+      <img src="Q13.jpg" class="image" alt="suicide">
+      <p>13. 您有没有想过自杀？</p>
+      <div class="radio">
+      <input type="radio" name="q13" value="0"> 没有<br>
+      <input type="radio" name="q13" value="4"> 有<br>
+      </div> 
+      <div class="button-container">
+      <button type="button" class="prev-btn"onclick="prevQuestion()">上一题</button>
+      <button type="button" class="next-btn" onclick="nextQuestion();">下一题</button>
+      </div>
+    </div>
+
+    <div id="q14" style="display: none;">
+      <h2>感谢您完成测试！</h2>
+      <p>点击下面的按钮查看结果：</p>
+      <div class="container2">
+        <button id="button" type="button" onclick="calculateScore();" class="submit-button" style="display: none;">提交</button>
+      </div>
+    </div>
+
+  </form>
+  <div id="result"></div>
+</body>
+</html>
